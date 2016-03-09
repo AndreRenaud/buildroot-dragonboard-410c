@@ -1,0 +1,8 @@
+config BR2_PACKAGE_HOST_CLANG
+	bool "host clang"
+	depends on BR2_PACKAGE_LLVM_ARCH_SUPPORTS
+	help
+	  Clang is a C++, Objective C and Objective C++ front-end for
+	  the LLVM compiler.
+
+	  http://llvm.org

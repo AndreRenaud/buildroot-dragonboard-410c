@@ -1,0 +1,37 @@
+From d46e38da621a64637970a071b9aa08dc17f0638b Mon Sep 17 00:00:00 2001
+From: Romain Naour <romain.naour@gmail.com>
+Date: Mon, 3 Jul 2017 10:37:11 +0200
+Subject: [PATCH] configure.py: allow to define llvm-bindir for cross-compiling
+
+TODO
+
+Signed-off-by: Romain Naour <romain.naour@gmail.com>
+---
+ configure.py | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/configure.py b/configure.py
+index f26f535..fe4cbc0 100755
+--- a/configure.py
++++ b/configure.py
+@@ -22,6 +22,8 @@ import metabuild
+ p = OptionParser()
+ p.add_option('--with-llvm-config', metavar='PATH',
+              help='use given llvm-config script')
++p.add_option('--llvm-bindir', metavar='PATH',
++             help='use given llvm-bindir')
+ p.add_option('--with-cxx-compiler', metavar='PATH',
+              help='use given C++ compiler')
+ p.add_option('--prefix', metavar='PATH',
+@@ -74,7 +76,7 @@ if llvm_int_version < 400:
+     sys.exit(1)
+ 
+ llvm_system_libs = llvm_config(['--system-libs'])
+-llvm_bindir = llvm_config(['--bindir'])
++llvm_bindir = options.llvm_bindir or llvm_config(['--bindir'])
+ llvm_core_libs = llvm_config(['--libs', 'core', 'bitreader', 'bitwriter']) + ' ' + \
+                  llvm_system_libs + ' ' + \
+                  llvm_config(['--ldflags'])
+-- 
+2.9.4
+

@@ -25,6 +25,14 @@ menuconfig BR2_PACKAGE_MESA3D
 
 if BR2_PACKAGE_MESA3D
 
+config BR2_PACKAGE_MESA3D_LLVM
+	bool "mesa3d w/ llvm"
+	depends on BR2_PACKAGE_LLVM_ARCH_SUPPORTS
+	select BR2_PACKAGE_LLVM
+
+comment "mesa3d w/ llvm needs a llvm compiler"
+	depends on !BR2_PACKAGE_LLVM_ARCH_SUPPORTS
+
 # inform the .mk file of gallium, dri or vulkan driver selection
 config BR2_PACKAGE_MESA3D_GALLIUM_DRIVER
 	bool

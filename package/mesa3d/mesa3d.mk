@@ -32,6 +32,20 @@ ifeq ($(BR2_SHARED_STATIC_LIBS),y)
 MESA3D_CONF_OPTS += --disable-static
 endif
 
+ifeq ($(BR2_PACKAGE_MESA3D_LLVM),y)
+MESA3D_DEPENDENCIES += host-llvm llvm
+MESA3D_CONF_OPTS += \
+	--with-llvm-prefix=$(STAGING_DIR)/usr \
+	--enable-llvm-shared-libs \
+	--enable-llvm
+else
+# Avoid automatic search of llvm-config
+MESA3D_CONF_OPTS += \
+	--with-llvm-prefix=$(STAGING_DIR)/usr \
+	--disable-llvm-shared-libs \
+	--disable-llvm
+endif
+
 # The Sourcery MIPS toolchain has a special (non-upstream) feature to
 # have "compact exception handling", which unfortunately breaks with
 # mesa3d, so we disable it here by passing -mno-compact-eh.
@@ -219,8 +233,5 @@ MESA3D_DEPENDENCIES += lm-sensors
 else
 MESA3D_CONF_OPTS += --disable-lmsensors
 endif
-
-# Avoid automatic search of llvm-config
-MESA3D_CONF_OPTS += --with-llvm-prefix=$(STAGING_DIR)/usr/bin
 
 $(eval $(autotools-package))

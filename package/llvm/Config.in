@@ -1,0 +1,29 @@
+config BR2_PACKAGE_LLVM_ARCH_SUPPORTS
+	bool
+	# http://llvm.org/docs/GettingStarted.html#host-c-toolchain-both-compiler-and-standard-library
+	# http://llvm.org/docs/GettingStarted.html#local-llvm-configuration
+	depends on BR2_HOST_GCC_AT_LEAST_4_8
+	default y if BR2_arm || BR2_armeb
+	default y if BR2_aarch64
+	default y if BR2_i386 || BR2_x86_64
+	default y if BR2_mips || BR2_mipsel || BR2_mips64 || BR2_mips64el
+	default y if BR2_powerpc || BR2_powerpc64 || BR2_powerpc64le
+	default y if BR2_sparc
+
+config BR2_PACKAGE_LLVM_TARGET_ARCH
+	string
+	default "ARM" if BR2_arm || BR2_armeb
+	default "AArch64" if BR2_aarch64
+	default "X86" if BR2_i386 || BR2_x86_64
+	default "Mips" if BR2_mips || BR2_mipsel || BR2_mips64 || BR2_mips64el
+	default "PowerPC" if BR2_powerpc || BR2_powerpc64 || BR2_powerpc64le
+	default "Sparc" if BR2_sparc
+
+config BR2_PACKAGE_LLVM
+	bool "llvm"
+	depends on BR2_PACKAGE_LLVM_ARCH_SUPPORTS
+	help
+	  The LLVM Project is a collection of modular and reusable
+	  compiler and toolchain technologies.
+
+	  http://llvm.org

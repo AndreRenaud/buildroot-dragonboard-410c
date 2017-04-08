@@ -33,6 +33,21 @@ config BR2_PACKAGE_MESA3D_LLVM
 comment "mesa3d w/ llvm needs a llvm compiler"
 	depends on !BR2_PACKAGE_LLVM_ARCH_SUPPORTS
 
+config BR2_PACKAGE_MESA3D_OPENCL
+	bool "mesa3d openCL"
+	depends on BR2_PACKAGE_MESA3D_LLVM
+	depends on BR2_USE_WCHAR # elfutils
+	depends on BR2_TOOLCHAIN_USES_UCLIBC || BR2_TOOLCHAIN_USES_GLIBC # elfutils
+	depends on !BR2_bfin # elfutils
+	select BR2_PACKAGE_ELFUTILS
+	select BR2_PACKAGE_LIBCLC
+
+comment "mesa3d openCL needs a uClibc or glibc toolchain w/ wchar"
+	depends on BR2_PACKAGE_MESA3D_LLVM
+	depends on !BR2_bfin
+	depends on !BR2_USE_WCHAR \
+		|| !(BR2_TOOLCHAIN_USES_UCLIBC || BR2_TOOLCHAIN_USES_GLIBC)
+
 # inform the .mk file of gallium, dri or vulkan driver selection
 config BR2_PACKAGE_MESA3D_GALLIUM_DRIVER
 	bool

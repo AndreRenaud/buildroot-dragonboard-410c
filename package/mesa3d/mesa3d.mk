@@ -234,4 +234,13 @@ else
 MESA3D_CONF_OPTS += --disable-lmsensors
 endif
 
+# libclc (Clover) requires libelf
+ifeq ($(BR2_PACKAGE_MESA3D_OPENCL),y)
+MESA3D_DEPENDENCIES += clang elfutils libclc
+MESA3D_CONF_OPTS += --enable-opencl \
+	--with-clang-libdir=$(HOST_DIR)/usr/lib
+else
+MESA3D_CONF_OPTS += --disable-opencl
+endif
+
 $(eval $(autotools-package))

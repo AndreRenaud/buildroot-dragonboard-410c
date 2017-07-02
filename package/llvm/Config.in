@@ -27,3 +27,12 @@ config BR2_PACKAGE_LLVM
 	  compiler and toolchain technologies.
 
 	  http://llvm.org
+
+if BR2_PACKAGE_LLVM
+
+config BR2_PACKAGE_LLVM_TARGET_ARCH_AMDGPU
+	bool "AMDGPU"
+	help
+	  TODO
+
+endif # BR2_PACKAGE_LLVM

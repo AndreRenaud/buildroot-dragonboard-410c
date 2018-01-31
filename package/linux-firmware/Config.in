@@ -29,6 +29,11 @@ config BR2_PACKAGE_LINUX_FIRMWARE_RADEON
 	help
 	  Firmware files for AMD Radeon video cards.
 
+config BR2_PACKAGE_LINUX_FIRMWARE_QCOM
+	bool "Qualcomm video card firmware"
+	help
+	  Firmware files for Qualcomm/Snapdragon video cards.
+
 endmenu # Video
 
 menu "Bluetooth firmware"

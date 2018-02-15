@@ -1,0 +1,7 @@
+config BR2_PACKAGE_FESTIVAL
+	bool "festival"
+	depends on BR2_PACKAGE_SPEECH_TOOLS
+	help
+	  Festival Speech Synthesis System
+
+	  http://www.cstr.ed.ac.uk/projects/festival/

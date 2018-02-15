@@ -1,0 +1,6 @@
+config BR2_PACKAGE_SPEECH_TOOLS
+	bool "speech_tools"
+	help
+	  Festival Speech Synthesis System Speech Tools
+
+	  http://www.cstr.ed.ac.uk/projects/festival/
